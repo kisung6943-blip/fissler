@@ -1,7 +1,57 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+
+function AdminSection({ smsText, handleCopy, handleShare, copied }: { 
+  smsText: string; 
+  handleCopy: () => void; 
+  handleShare: () => void;
+  copied: boolean;
+}) {
+  const searchParams = useSearchParams();
+  const isAdmin = searchParams.get("admin") === "true";
+
+  if (!isAdmin) return null;
+
+  return (
+    <section className="bg-blue-50/50 rounded-2xl border border-blue-100 p-5 mt-4">
+      <div className="flex flex-col gap-4 text-center">
+        <div>
+          <h3 className="font-bold text-blue-900 text-base mb-1">운영자용: 안내 메시지 공유</h3>
+          <p className="text-blue-700 text-xs leading-relaxed opacity-80">
+            고객님께 보낼 문자 내용을 아래 링크를 포함해<br />공유하거나 복사할 수 있습니다.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-2 gap-3">
+          <button 
+            onClick={handleCopy}
+            className={`flex flex-col items-center justify-center gap-2 p-3 rounded-xl border transition-all ${
+              copied ? "bg-green-50 border-green-200 text-green-700" : "bg-white border-blue-100 text-blue-700 hover:bg-blue-50"
+            }`}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+            </svg>
+            <span className="text-xs font-bold">{copied ? "복사 완료!" : "문구 복사"}</span>
+          </button>
+
+          <button 
+            onClick={handleShare}
+            className="flex flex-col items-center justify-center gap-2 p-3 rounded-xl bg-white border border-blue-100 text-blue-700 hover:bg-blue-50 transition-all"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+            </svg>
+            <span className="text-xs font-bold">기기로 공유</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
@@ -9,7 +59,8 @@ export default function Home() {
 
   useEffect(() => {
     // 클라이언트 사이드에서만 실행됨
-    setCurrentUrl(window.location.origin);
+    // URL에 파라미터가 있다면 제거한 순수 주소만 공유용으로 사용
+    setCurrentUrl(window.location.origin + window.location.pathname);
   }, []);
 
   const smsText = `압력솥 고무패킹 주문하신 
@@ -156,41 +207,15 @@ ${currentUrl}
           </div>
         </article>
 
-        {/* Manager Tool: SMS Share Section */}
-        <section className="bg-blue-50/50 rounded-2xl border border-blue-100 p-5 mt-4">
-          <div className="flex flex-col gap-4 text-center">
-            <div>
-              <h3 className="font-bold text-blue-900 text-base mb-1">운영자용: 안내 메시지 공유</h3>
-              <p className="text-blue-700 text-xs leading-relaxed opacity-80">
-                고객님께 보낼 문자 내용을 아래 링크를 포함해<br />공유하거나 복사할 수 있습니다.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-2 gap-3">
-              <button 
-                onClick={handleCopy}
-                className={`flex flex-col items-center justify-center gap-2 p-3 rounded-xl border transition-all ${
-                  copied ? "bg-green-50 border-green-200 text-green-700" : "bg-white border-blue-100 text-blue-700 hover:bg-blue-50"
-                }`}
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                </svg>
-                <span className="text-xs font-bold">{copied ? "복사 완료!" : "문구 복사"}</span>
-              </button>
-
-              <button 
-                onClick={handleShare}
-                className="flex flex-col items-center justify-center gap-2 p-3 rounded-xl bg-white border border-blue-100 text-blue-700 hover:bg-blue-50 transition-all"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                </svg>
-                <span className="text-xs font-bold">기기로 공유</span>
-              </button>
-            </div>
-          </div>
-        </section>
+        {/* Manager Tool: SMS Share Section (Wrapped in Suspense for useSearchParams) */}
+        <Suspense fallback={<div className="h-20 bg-gray-50 animate-pulse rounded-2xl" />}>
+          <AdminSection 
+            smsText={smsText} 
+            handleCopy={handleCopy} 
+            handleShare={handleShare} 
+            copied={copied} 
+          />
+        </Suspense>
 
       </div>
 

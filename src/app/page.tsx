@@ -155,6 +155,15 @@ ${currentUrl}
               />
             </div>
           </div>
+          <div className="px-5 pb-6 pt-3 bg-green-50/50 text-center border-t border-green-100">
+            <p className="text-green-800 text-sm font-bold break-keep leading-relaxed">
+              알맞은 모델로 주문하신 경우<br />
+              따로 문자 답신 안주셔도 됩니다.<br />
+              <span className="text-green-600 text-lg mt-1 block font-black underline underline-offset-4 decoration-green-300">
+                물품은 오늘 당일 발송됩니다.
+              </span>
+            </p>
+          </div>
         </article>
 
         <div className="flex items-center justify-center -my-2 relative z-10">

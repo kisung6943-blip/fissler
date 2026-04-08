@@ -2,7 +2,6 @@
 
 import { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
 
 // --- 브랜드/모델 데이터 ---
 const BRANDS = [

@@ -33,6 +33,10 @@ export default function RootLayout({
       lang="ko"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <meta name="color-scheme" content="only light" />
+        <meta name="supported-color-schemes" content="light" />
+      </head>
       <body className="min-h-full flex flex-col bg-gray-50">{children}</body>
     </html>
   );

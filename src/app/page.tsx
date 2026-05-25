@@ -189,7 +189,12 @@ ${currentUrl}
             </div>
             <p className="text-red-700 text-sm break-keep">
               고객님의 뚜껑 캡이 아래 모양과 같은 <strong>모델</strong>이라면,<br />
-              이번에 주문하신 고무패킹은 사용이 되지 않습니다.(구형모델로 주문해주세요)
+              이번에 주문하신 고무패킹은 사용이 되지 않습니다.<br />
+              (쿠팡에서 취소하시고 구형모델로 새로주문해주세요)
+            </p>
+            <p className="text-red-600 text-xs font-bold mt-2.5 break-keep leading-relaxed">
+              ⚠️ 오후 3시까지 취소하셔야 취소처리되오며<br />
+              3시 이후에는 물건이 발송한 이후라 취소처리가 안됩니다.
             </p>
           </div>
           <div className="p-5 flex flex-col gap-4 items-center justify-center bg-white">
@@ -214,8 +219,7 @@ ${currentUrl}
           <div className="p-5 bg-red-50/50 border-t border-red-100 flex flex-col gap-3 items-center text-center">
             <p className="text-sm font-medium text-red-800 break-keep">
               구형 고무패킹이 필요하신 고객님은<br />
-              쿠팡에서 취소 후 아래 전용 상품으로 다시 주문해 주세요.<br />
-              <span className="text-xs text-red-600/90 font-normal mt-1 block">(오후 3시까지 취소 처리 요망, 3시 이후에는 취소처리 불가함)</span>
+              아래 구매하기 버튼 클릭하셔서 구형으로 주문해주시기 바랍니다.
             </p>
             <a 
               href="https://www.coupang.com/vp/products/7208650431" 

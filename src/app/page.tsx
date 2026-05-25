@@ -77,7 +77,7 @@ export default function Home() {
                 className="object-contain p-2"
               />
               <span className="absolute top-2 left-2 bg-green-600 text-white text-[10px] font-black px-2.5 py-1 rounded-full shadow-sm">
-                신형 고무패킹 (본 상품)
+                신형 고무패킹
               </span>
             </div>
           </div>
@@ -140,7 +140,7 @@ export default function Home() {
                 className="object-contain p-2"
               />
               <span className="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-black px-2.5 py-1 rounded-full shadow-sm">
-                구형 고무패킹 (이 제품으로 변경 주문)
+                구형 고무패킹
               </span>
             </div>
           </div>

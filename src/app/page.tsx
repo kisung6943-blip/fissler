@@ -132,6 +132,17 @@ export default function Home() {
                 className="object-contain"
               />
             </div>
+            <div className="relative w-full aspect-[4/3] max-w-[360px] overflow-hidden rounded-lg shadow-sm border border-gray-100 ring-4 ring-red-50 bg-gray-50/50">
+              <Image 
+                src="/old_gasket.png" 
+                alt="구형 고무패킹 이미지"
+                fill
+                className="object-contain p-2"
+              />
+              <span className="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-black px-2.5 py-1 rounded-full shadow-sm">
+                구형 고무패킹 (이 제품으로 변경 주문)
+              </span>
+            </div>
           </div>
           
           <div className="p-5 bg-red-50/50 border-t border-red-100 flex flex-col gap-3 items-center text-center">
